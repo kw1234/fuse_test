@@ -4,8 +4,8 @@
   "requiresCompatibilities": ["FARGATE"],
   "cpu": "512",
   "memory": "1024",
-  "executionRoleArn": "arn:aws:iam::160885246465:role/ecsTaskExecutionRole",
-  "taskRoleArn": "arn:aws:iam::160885246465:role/ecsTaskRole",
+  "executionRoleArn": "",
+  "taskRoleArn": "",
   "containerDefinitions": [
     {
       "name": "fuse-worker",
@@ -15,11 +15,11 @@
       "environment": [
         {
           "name": "PG_DATABASE_URL",
-          "value": "postgresql://neondb_owner:npg_xrjvZAYd5eQ2@ep-young-mode-aehs53oa-pooler.c-2.us-east-2.aws.neon.tech/default?sslmode=require&channel_binding=require"
+          "value": ""
         },
         {
           "name": "SERVER_URL",
-          "value": "https://fuse.yourdomain.com"
+          "value": ""
         },
         {
           "name": "REDIS_URL",
@@ -43,7 +43,7 @@
         },
         {
           "name": "STORAGE_S3_NAME",
-          "value": "fuse-s3-bucket-2025"
+          "value": ""
         },
         {
           "name": "STORAGE_S3_ENDPOINT",

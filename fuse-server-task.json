@@ -24,11 +24,11 @@
                 },
                 {
                     "name": "PG_DATABASE_URL",
-                    "value": "postgresql://neondb_owner:npg_xrjvZAYd5eQ2@ep-young-mode-aehs53oa-pooler.c-2.us-east-2.aws.neon.tech/default?sslmode=require&channel_binding=require"
+                    "value": ""
                 },
                 {
                     "name": "APP_SECRET",
-                    "value": "0uEWvNh9janNADBBawBjCukQV2AjmBT3TR1yaLdWSQA="
+                    "value": ""
                 },
                 {
                     "name": "STORAGE_S3_REGION",
@@ -36,11 +36,11 @@
                 },
                 {
                     "name": "STORAGE_S3_NAME",
-                    "value": "fuse-s3-bucket-2025"
+                    "value": ""
                 },
                 {
                     "name": "SERVER_URL",
-                    "value": "https://fuse-alb-1568620899.us-east-1.elb.amazonaws.com"
+                    "value": ""
                 },
                 {
                     "name": "STORAGE_TYPE",
@@ -48,7 +48,7 @@
                 },
                 {
                     "name": "REDIS_URL",
-                    "value": "redis://fuse-redis.oraeit.ng.0001.use1.cache.amazonaws.com:6379"
+                    "value": ""
                 }
             ],
             "mountPoints": [],
@@ -74,8 +74,8 @@
             "systemControls": []
         }
     ],
-    "taskRoleArn": "arn:aws:iam::160885246465:role/ecsTaskRole",
-    "executionRoleArn": "arn:aws:iam::160885246465:role/ecsTaskExecutionRole",
+    "taskRoleArn": "",
+    "executionRoleArn": "",
     "networkMode": "awsvpc",
     "volumes": [],
     "placementConstraints": [],
