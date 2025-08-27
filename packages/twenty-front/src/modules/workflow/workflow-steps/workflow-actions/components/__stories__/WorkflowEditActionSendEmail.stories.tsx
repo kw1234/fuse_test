@@ -50,8 +50,8 @@ const CONFIGURED_ACTION: WorkflowSendEmailAction = {
     input: {
       connectedAccountId: mockedConnectedAccounts[0].accountOwnerId,
       email: 'test@twenty.com',
-      subject: 'Welcome to Twenty!',
-      body: 'Dear Tim,\n\nWelcome to Twenty! We are excited to have you on board.\n\nBest regards,\nThe Team',
+      subject: 'Welcome to Fuse!',
+      body: 'Dear Tim,\n\nWelcome to Fuse! We are excited to have you on board.\n\nBest regards,\nThe Team',
     },
     outputSchema: {},
     errorHandlingOptions: {
@@ -136,7 +136,7 @@ export const Configured: Story = {
     const emailInput = await canvas.findByText('tim@twenty.com');
     expect(emailInput).toBeVisible();
 
-    const subjectInput = await canvas.findByText('Welcome to Twenty!');
+    const subjectInput = await canvas.findByText('Welcome to Fuse!');
     expect(subjectInput).toBeVisible();
   },
 };

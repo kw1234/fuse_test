@@ -5,7 +5,7 @@ export const metadata = {
   title: 'Twenty - User Guide',
   description:
     'Discover how to use Twenty CRM effectively with our detailed user guide. Explore ways to customize features, manage tasks, integrate emails, and navigate the system with ease.',
-  icons: '/images/core/logo.svg',
+  icons: '/images/core/fuse-logo-transparent.png',
 };
 
 export default async function UserGuideHome() {

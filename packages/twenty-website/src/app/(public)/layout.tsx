@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Twenty.com',
   description: 'Open Source CRM',
-  icons: '/images/core/logo.svg',
+  icons: '/images/core/fuse-logo-transparent.png',
 };
 
 const gabarito = Gabarito({
