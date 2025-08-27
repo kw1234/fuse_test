@@ -1,0 +1,34 @@
+aws elbv2 create-target-group \
+  --name fuse-targets \
+  --protocol HTTP \
+  --port 3000 \
+  --vpc-id vpc-0d437a52d7d186304 \
+  --target-type ip \
+  --health-check-path /healthz \
+  --health-check-interval-seconds 30 \
+  --health-check-timeout-seconds 5 \
+  --healthy-threshold-count 2 \
+  --unhealthy-threshold-count 3
+
+  aws elbv2 create-listener \
+  --load-balancer-arn arn:aws:elasticloadbalancing:us-east-1:160885246465:loadbalancer/app/fuse-alb/cc138b58114ca142 \
+  --protocol HTTP \
+  --port 80 \
+  --default-actions Type=forward,TargetGroupArn=arn:aws:elasticloadbalancing:us-east-1:160885246465:targetgroup/fuse-targets/8cc3c97e55e3b8ff
+
+  aws ecs create-service \
+  --cluster fuse-cluster \
+  --service-name fuse-server-service \
+  --task-definition fuse-server-task:1 \
+  --desired-count 1 \
+  --launch-type FARGATE \
+  --network-configuration "awsvpcConfiguration={subnets=[subnet-0cf91063c2e5a7d08,subnet-0fc4ed6f4b66bfc90],securityGroups=[sg-0d9b53100433aefc4],assignPublicIp=ENABLED}" \
+  --load-balancers targetGroupArn=arn:aws:elasticloadbalancing:us-east-1:160885246465:targetgroup/fuse-targets/8cc3c97e55e3b8ff,containerName=fuse-server,containerPort=3000
+
+  aws ecs create-service \
+  --cluster fuse-cluster \
+  --service-name fuse-worker-service \
+  --task-definition fuse-worker-task:1 \
+  --desired-count 1 \
+  --launch-type FARGATE \
+  --network-configuration "awsvpcConfiguration={subnets=[subnet-xxxxxxxxx,subnet-yyyyyyyyy],securityGroups=[sg-xxxxxxxxx],assignPublicIp=ENABLED}"
