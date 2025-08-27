@@ -42,7 +42,7 @@ describe('title-utils', () => {
     expect(getPageTitleFromPath('/settings/general')).toBe(
       SettingsPageTitles.General,
     );
-    expect(getPageTitleFromPath('/')).toBe('Twenty');
-    expect(getPageTitleFromPath('/random')).toBe('Twenty');
+    expect(getPageTitleFromPath('/')).toBe('Fuse');
+    expect(getPageTitleFromPath('/random')).toBe('Fuse');
   });
 });

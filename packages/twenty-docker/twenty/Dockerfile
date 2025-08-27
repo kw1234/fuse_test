@@ -28,7 +28,7 @@ COPY ./packages/twenty-emails /app/packages/twenty-emails
 COPY ./packages/twenty-shared /app/packages/twenty-shared
 COPY ./packages/twenty-server /app/packages/twenty-server
 
-RUN npx nx run twenty-server:build
+RUN cd packages/twenty-server && rm -rf dist || true && npx nest build --path ./tsconfig.build.json
 
 RUN yarn workspaces focus --production twenty-emails twenty-shared twenty-server
 
