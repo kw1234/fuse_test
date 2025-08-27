@@ -1,0 +1,87 @@
+{
+    "family": "fuse-server-task",
+    "containerDefinitions": [
+        {
+            "name": "fuse-server",
+            "image": "twentycrm/twenty:latest",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "hostPort": 3000,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "STORAGE_S3_ENDPOINT",
+                    "value": "https://s3.us-east-1.amazonaws.com"
+                },
+                {
+                    "name": "NODE_PORT",
+                    "value": "3000"
+                },
+                {
+                    "name": "PG_DATABASE_URL",
+                    "value": "postgresql://neondb_owner:npg_xrjvZAYd5eQ2@ep-young-mode-aehs53oa-pooler.c-2.us-east-2.aws.neon.tech/default?sslmode=require&channel_binding=require"
+                },
+                {
+                    "name": "APP_SECRET",
+                    "value": "0uEWvNh9janNADBBawBjCukQV2AjmBT3TR1yaLdWSQA="
+                },
+                {
+                    "name": "STORAGE_S3_REGION",
+                    "value": "us-east-1"
+                },
+                {
+                    "name": "STORAGE_S3_NAME",
+                    "value": "fuse-s3-bucket-2025"
+                },
+                {
+                    "name": "SERVER_URL",
+                    "value": "https://fuse-alb-1568620899.us-east-1.elb.amazonaws.com"
+                },
+                {
+                    "name": "STORAGE_TYPE",
+                    "value": "s3"
+                },
+                {
+                    "name": "REDIS_URL",
+                    "value": "redis://fuse-redis.oraeit.ng.0001.use1.cache.amazonaws.com:6379"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/fuse-server",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            },
+            "healthCheck": {
+                "command": [
+                    "CMD-SHELL",
+                    "curl --fail http://localhost:3000/healthz || exit 1"
+                ],
+                "interval": 30,
+                "timeout": 5,
+                "retries": 3,
+                "startPeriod": 60
+            },
+            "systemControls": []
+        }
+    ],
+    "taskRoleArn": "arn:aws:iam::160885246465:role/ecsTaskRole",
+    "executionRoleArn": "arn:aws:iam::160885246465:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "volumes": [],
+    "placementConstraints": [],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "2048"
+}
