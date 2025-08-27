@@ -1,16 +1,19 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import packageJson from './package.json';
+import packageJson from './package.json' with { type: 'json' };
 
-const moduleEntries = Object.keys((packageJson as any).exports || {})
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const moduleEntries = Object.keys(packageJson.exports || {})
   .filter((key) => key !== './style.css' && key !== '.' && !key.startsWith('./src/'))
   .map((module) => `src/${module.replace(/^\.\//, '')}/index.ts`);
 
 const entries = ['src/index.ts', ...moduleEntries];
 
-const entryFileNames = (chunk: any, extension: 'cjs' | 'mjs') => {
+const entryFileNames = (chunk, extension) => {
   if (!chunk.isEntry) {
     throw new Error(
       `Should never occurs, encountered a non entry chunk ${chunk.facadeModuleId}`,
@@ -42,7 +45,7 @@ export default defineConfig(() => {
       outDir: 'dist',
       lib: { entry: entries, name: 'twenty-shared' },
       rollupOptions: {
-        external: Object.keys((packageJson as any).dependencies || {}),
+        external: Object.keys(packageJson.dependencies || {}),
         output: [
           {
             format: 'es',

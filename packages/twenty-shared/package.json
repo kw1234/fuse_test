@@ -5,7 +5,7 @@
   "types": "dist/index.d.ts",
   "license": "AGPL-3.0",
   "scripts": {
-    "build": "npx vite build"
+    "build": "npx vite build --config vite.config.mjs"
   },
   "engines": {
     "node": "^24.5.0",
