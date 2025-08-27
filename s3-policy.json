@@ -10,8 +10,8 @@
         "s3:ListBucket"
       ],
       "Resource": [
-        "arn:aws:s3:::fuse-files-bucket-160885246465",
-        "arn:aws:s3:::fuse-files-bucket-160885246465/*"
+        "arn:aws:s3:::",
+        "arn:aws:s3:::/*"
       ]
     }
   ]
