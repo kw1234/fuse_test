@@ -196,6 +196,16 @@ export const workflowAiAgentActionSettingsSchema =
     }),
   });
 
+export const workflowAiSummaryActionSettingsSchema =
+  baseWorkflowActionSettingsSchema.extend({
+    input: z.object({
+      prompt: z.string().describe('The prompt to send to OpenAI ChatGPT for generating a summary'),
+      model: z.string().default('gpt-3.5-turbo').describe('The OpenAI model to use (e.g., gpt-3.5-turbo, gpt-4)'),
+      maxTokens: z.number().default(500).describe('Maximum number of tokens in the response'),
+      temperature: z.number().min(0).max(2).default(0.7).describe('Controls randomness in the output (0-2)'),
+    }),
+  });
+
 export const workflowFilterActionSettingsSchema =
   baseWorkflowActionSettingsSchema.extend({
     input: z.object({
@@ -274,6 +284,11 @@ export const workflowAiAgentActionSchema = baseWorkflowActionSchema.extend({
   settings: workflowAiAgentActionSettingsSchema,
 });
 
+export const workflowAiSummaryActionSchema = baseWorkflowActionSchema.extend({
+  type: z.literal('AI_SUMMARY'),
+  settings: workflowAiSummaryActionSettingsSchema,
+});
+
 export const workflowFilterActionSchema = baseWorkflowActionSchema.extend({
   type: z.literal('FILTER'),
   settings: workflowFilterActionSettingsSchema,
@@ -295,6 +310,7 @@ export const workflowActionSchema = z.discriminatedUnion('type', [
   workflowFormActionSchema,
   workflowHttpRequestActionSchema,
   workflowAiAgentActionSchema,
+  workflowAiSummaryActionSchema,
   workflowFilterActionSchema,
   workflowIteratorActionSchema,
 ]);

@@ -85,6 +85,8 @@ export class WorkflowSchemaWorkspaceService {
           },
         };
       }
+      case WorkflowActionType.AI_SUMMARY:
+      case WorkflowActionType.AI_AGENT:
       case WorkflowActionType.CODE: // StepOutput schema is computed on serverlessFunction draft execution
       default:
         return {};

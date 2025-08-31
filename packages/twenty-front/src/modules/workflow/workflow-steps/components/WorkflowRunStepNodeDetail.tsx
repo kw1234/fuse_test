@@ -6,6 +6,7 @@ import {
 import { getStepDefinitionOrThrow } from '@/workflow/utils/getStepDefinitionOrThrow';
 import { WorkflowEditActionAiAgent } from '@/workflow/workflow-steps/workflow-actions/ai-agent-action/components/WorkflowEditActionAiAgent';
 import { WorkflowActionServerlessFunction } from '@/workflow/workflow-steps/workflow-actions/code-action/components/WorkflowActionServerlessFunction';
+import { WorkflowEditActionAiSummary } from '@/workflow/workflow-steps/workflow-actions/components/WorkflowEditActionAiSummary';
 import { WorkflowEditActionCreateRecord } from '@/workflow/workflow-steps/workflow-actions/components/WorkflowEditActionCreateRecord';
 import { WorkflowEditActionDeleteRecord } from '@/workflow/workflow-steps/workflow-actions/components/WorkflowEditActionDeleteRecord';
 import { WorkflowEditActionSendEmail } from '@/workflow/workflow-steps/workflow-actions/components/WorkflowEditActionSendEmail';
@@ -196,6 +197,17 @@ export const WorkflowRunStepNodeDetail = ({
         case 'AI_AGENT': {
           return (
             <WorkflowEditActionAiAgent
+              key={stepId}
+              action={stepDefinition.definition}
+              actionOptions={{
+                readonly: true,
+              }}
+            />
+          );
+        }
+        case 'AI_SUMMARY': {
+          return (
+            <WorkflowEditActionAiSummary
               key={stepId}
               action={stepDefinition.definition}
               actionOptions={{

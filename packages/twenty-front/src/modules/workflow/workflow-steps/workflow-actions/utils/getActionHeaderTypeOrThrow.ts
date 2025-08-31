@@ -17,6 +17,8 @@ export const getActionHeaderTypeOrThrow = (actionType: WorkflowActionType) => {
       return msg`HTTP Request`;
     case 'AI_AGENT':
       return msg`AI Agent`;
+    case 'AI_SUMMARY':
+      return msg`AI Summary`;
     case 'FILTER': {
       return msg`Filter`;
     }

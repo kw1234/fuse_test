@@ -1,9 +1,9 @@
-import { test as base, expect, Locator, Page } from '@playwright/test';
+import { test as base, expect, type Locator, type Page } from '@playwright/test';
 import { randomUUID } from 'node:crypto';
 import { createWorkflow } from '../requests/create-workflow';
 import { deleteWorkflow } from '../requests/delete-workflow';
 import { destroyWorkflow } from '../requests/destroy-workflow';
-import { WorkflowActionType, WorkflowTriggerType } from '../types/workflows';
+import { type WorkflowActionType, type WorkflowTriggerType } from '../types/workflows';
 
 export class WorkflowVisualizerPage {
   #page: Page;

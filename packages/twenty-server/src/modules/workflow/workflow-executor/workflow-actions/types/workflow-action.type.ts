@@ -1,4 +1,5 @@
 import { type WorkflowAiAgentActionSettings } from 'src/modules/workflow/workflow-executor/workflow-actions/ai-agent/types/workflow-ai-agent-action-settings.type';
+import { type WorkflowAiSummaryActionSettings } from 'src/modules/workflow/workflow-executor/workflow-actions/ai-summary/types/workflow-ai-summary-action-settings.type';
 import { type WorkflowCodeActionSettings } from 'src/modules/workflow/workflow-executor/workflow-actions/code/types/workflow-code-action-settings.type';
 import { type WorkflowFilterActionSettings } from 'src/modules/workflow/workflow-executor/workflow-actions/filter/types/workflow-filter-action-settings.type';
 import { type WorkflowFormActionSettings } from 'src/modules/workflow/workflow-executor/workflow-actions/form/types/workflow-form-action-settings.type';
@@ -25,6 +26,7 @@ export enum WorkflowActionType {
   HTTP_REQUEST = 'HTTP_REQUEST',
   AI_AGENT = 'AI_AGENT',
   ITERATOR = 'ITERATOR',
+  AI_SUMMARY = 'AI_SUMMARY',
 }
 
 type BaseWorkflowAction = {
@@ -90,6 +92,11 @@ export type WorkflowAiAgentAction = BaseWorkflowAction & {
   settings: WorkflowAiAgentActionSettings;
 };
 
+export type WorkflowAiSummaryAction = BaseWorkflowAction & {
+  type: WorkflowActionType.AI_SUMMARY;
+  settings: WorkflowAiSummaryActionSettings;
+};
+
 export type WorkflowIteratorAction = BaseWorkflowAction & {
   type: WorkflowActionType.ITERATOR;
   settings: WorkflowIteratorActionSettings;
@@ -106,4 +113,5 @@ export type WorkflowAction =
   | WorkflowFilterAction
   | WorkflowHttpRequestAction
   | WorkflowAiAgentAction
-  | WorkflowIteratorAction;
+  | WorkflowIteratorAction
+  | WorkflowAiSummaryAction;

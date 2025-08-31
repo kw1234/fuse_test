@@ -42993,6 +42993,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"openai@npm:^5.16.0":
+  version: 5.16.0
+  resolution: "openai@npm:5.16.0"
+  peerDependencies:
+    ws: ^8.18.0
+    zod: ^3.23.8
+  peerDependenciesMeta:
+    ws:
+      optional: true
+    zod:
+      optional: true
+  bin:
+    openai: bin/cli
+  checksum: 10c0/4ddd3292ed9ff5991de9f12b765c977efdfe9fdb6f3f7c01eef13ef927d0300b2c6cf0c9379a36c522353a7bacf07e8bdf5ff9ab7a3e5a5f839e0b741e9a86cf
+  languageName: node
+  linkType: hard
+
 "openapi-types@npm:12.1.3":
   version: 12.1.3
   resolution: "openapi-types@npm:12.1.3"
@@ -51221,6 +51238,7 @@ __metadata:
     nest-commander: "npm:3.14.0"
     node-ical: "npm:^0.20.1"
     nodemailer: "npm:6.9.14"
+    openai: "npm:^5.16.0"
     openapi-types: "npm:12.1.3"
     openid-client: "npm:^5.7.0"
     otplib: "npm:^12.0.1"
