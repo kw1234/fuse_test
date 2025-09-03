@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
 
+import { resolveInput } from 'twenty-shared/utils';
+
 import { type WorkflowAction } from 'src/modules/workflow/workflow-executor/interfaces/workflow-action.interface';
 
 import { type WorkflowActionInput } from 'src/modules/workflow/workflow-executor/types/workflow-action-input';
 import { type WorkflowActionOutput } from 'src/modules/workflow/workflow-executor/types/workflow-action-output.type';
 import { isWorkflowAiSummaryAction } from 'src/modules/workflow/workflow-executor/workflow-actions/ai-summary/guards/is-workflow-ai-summary-action.guard';
 import { AiSummaryExecutorService } from 'src/modules/workflow/workflow-executor/workflow-actions/ai-summary/services/ai-summary-executor.service';
+import { type WorkflowAiSummaryActionInput } from 'src/modules/workflow/workflow-executor/workflow-actions/ai-summary/types/workflow-ai-summary-action-input.type';
 
 @Injectable()
 export class AiSummaryWorkflowAction implements WorkflowAction {
@@ -16,7 +19,7 @@ export class AiSummaryWorkflowAction implements WorkflowAction {
   async execute({
     currentStepId,
     steps,
-    context: _context,
+    context,
   }: WorkflowActionInput): Promise<WorkflowActionOutput> {
     const step = steps.find((step) => step.id === currentStepId);
 
@@ -28,9 +31,12 @@ export class AiSummaryWorkflowAction implements WorkflowAction {
       throw new Error('Invalid action type for AI Summary workflow action');
     }
 
-    const result = await this.aiSummaryExecutorService.execute(
+    const resolvedInput = resolveInput(
       step.settings.input,
-    );
+      context,
+    ) as WorkflowAiSummaryActionInput;
+
+    const result = await this.aiSummaryExecutorService.execute(resolvedInput);
 
     return { result };
   }

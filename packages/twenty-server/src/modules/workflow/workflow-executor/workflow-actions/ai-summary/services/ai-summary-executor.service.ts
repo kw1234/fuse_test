@@ -49,7 +49,7 @@ export class AiSummaryExecutorService {
       this.logger.log(`Executing AI Summary with model: ${model}`);
 
       const completion = await this.openai.chat.completions.create({
-        model,
+        model: model || 'gpt-3.5-turbo',
         messages: [
           {
             role: 'user',
