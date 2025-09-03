@@ -25,6 +25,7 @@ export const getActionIconColorOrThrow = ({
     case 'FILTER':
       return theme.font.color.tertiary;
     case 'AI_AGENT':
+    case 'AI_SUMMARY':
       return theme.color.pink;
     default:
       assertUnreachable(actionType, `Unsupported action type: ${actionType}`);

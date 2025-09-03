@@ -1,5 +1,6 @@
 import { type OutputSchema } from 'src/modules/workflow/workflow-builder/workflow-schema/types/output-schema.type';
 import { type WorkflowAiAgentActionSettings } from 'src/modules/workflow/workflow-executor/workflow-actions/ai-agent/types/workflow-ai-agent-action-settings.type';
+import { type WorkflowAiSummaryActionSettings } from 'src/modules/workflow/workflow-executor/workflow-actions/ai-summary/types/workflow-ai-summary-action-settings.type';
 import { type WorkflowCodeActionSettings } from 'src/modules/workflow/workflow-executor/workflow-actions/code/types/workflow-code-action-settings.type';
 import { type WorkflowFilterActionSettings } from 'src/modules/workflow/workflow-executor/workflow-actions/filter/types/workflow-filter-action-settings.type';
 import { type WorkflowFormActionSettings } from 'src/modules/workflow/workflow-executor/workflow-actions/form/types/workflow-form-action-settings.type';
@@ -36,4 +37,5 @@ export type WorkflowActionSettings =
   | WorkflowFilterActionSettings
   | WorkflowHttpRequestActionSettings
   | WorkflowAiAgentActionSettings
+  | WorkflowAiSummaryActionSettings
   | WorkflowIteratorActionSettings;

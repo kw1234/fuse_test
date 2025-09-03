@@ -668,6 +668,22 @@ export class WorkflowVersionStepWorkspaceService {
           },
         };
       }
+      case WorkflowActionType.AI_SUMMARY: {
+        return {
+          ...baseStep,
+          name: 'AI Summary',
+          type: WorkflowActionType.AI_SUMMARY,
+          settings: {
+            ...BASE_STEP_DEFINITION,
+            input: {
+              prompt: '',
+              model: '',
+              maxTokens: 1000,
+              temperature: 0.7,
+            },
+          },
+        };
+      }
       default:
         throw new WorkflowVersionStepException(
           `WorkflowActionType '${type}' unknown`,
