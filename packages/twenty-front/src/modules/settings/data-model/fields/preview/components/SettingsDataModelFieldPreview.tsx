@@ -2,6 +2,7 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { useLabelIdentifierFieldMetadataItem } from '@/object-metadata/hooks/useLabelIdentifierFieldMetadataItem';
+import { useObjectMetadataItem } from '@/object-metadata/hooks/useObjectMetadataItem';
 import { type FieldMetadataItem } from '@/object-metadata/types/FieldMetadataItem';
 import { FieldDisplay } from '@/object-record/record-field/ui/components/FieldDisplay';
 import { FieldContext } from '@/object-record/record-field/ui/contexts/FieldContext';
@@ -62,6 +63,10 @@ export const SettingsDataModelFieldPreview = ({
       objectNameSingular: objectNameSingular,
     });
 
+  const { objectMetadataItem } = useObjectMetadataItem({
+    objectNameSingular,
+  });
+
   const { getIcon } = useIcons();
   const FieldIcon = getIcon(fieldMetadataItem.icon);
 
@@ -81,6 +86,20 @@ export const SettingsDataModelFieldPreview = ({
     objectMetadataNameSingular: objectNameSingular,
     options: fieldMetadataItem.options ?? [],
     settings: fieldMetadataItem.settings,
+  };
+
+  const recordIndexContextValue = {
+    indexIdentifierUrl: () => '',
+    onIndexRecordsLoaded: () => {},
+    objectNamePlural: objectMetadataItem.namePlural,
+    objectNameSingular: objectMetadataItem.nameSingular,
+    objectMetadataItem,
+    objectPermissionsByObjectMetadataId: {},
+    recordIndexId: 'preview',
+    recordFieldByFieldMetadataItemId: {},
+    labelIdentifierFieldMetadataItem,
+    fieldMetadataItemByFieldMetadataItemId: {},
+    fieldDefinitionByFieldMetadataItemId: {},
   };
 
   return (
