@@ -6,7 +6,7 @@ import { WorkflowStepBody } from '@/workflow/workflow-steps/components/WorkflowS
 import { WorkflowStepHeader } from '@/workflow/workflow-steps/components/WorkflowStepHeader';
 import { useWorkflowActionHeader } from '@/workflow/workflow-steps/workflow-actions/hooks/useWorkflowActionHeader';
 import { WorkflowVariablePicker } from '@/workflow/workflow-variables/components/WorkflowVariablePicker';
-import { type BaseOutputSchema } from '@/workflow/workflow-variables/types/StepOutputSchema';
+import { type BaseOutputSchemaDeprecated } from '@/workflow/workflow-variables/types/BaseOutputSchemaV2';
 import { useEffect, useState } from 'react';
 import { isDefined } from 'twenty-shared/utils';
 import { useIcons } from 'twenty-ui/display';
@@ -102,7 +102,7 @@ export const WorkflowEditActionAiSummary = ({
     });
 
   const { handleOutputSchemaChange, outputFields } = useAiSummaryOutputSchema(
-    action.settings.outputSchema as BaseOutputSchema,
+    action.settings.outputSchema as BaseOutputSchemaDeprecated,
     actionOptions.readonly === true ? undefined : actionOptions.onActionUpdate,
     action,
     actionOptions.readonly,
