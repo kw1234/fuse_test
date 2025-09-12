@@ -27,6 +27,7 @@ export enum WorkflowActionType {
   AI_AGENT = 'AI_AGENT',
   ITERATOR = 'ITERATOR',
   AI_SUMMARY = 'AI_SUMMARY',
+  EMPTY = 'EMPTY',
 }
 
 type BaseWorkflowAction = {
@@ -102,6 +103,10 @@ export type WorkflowIteratorAction = BaseWorkflowAction & {
   settings: WorkflowIteratorActionSettings;
 };
 
+export type WorkflowEmptyAction = BaseWorkflowAction & {
+  type: WorkflowActionType.EMPTY;
+};
+
 export type WorkflowAction =
   | WorkflowCodeAction
   | WorkflowSendEmailAction
@@ -114,4 +119,5 @@ export type WorkflowAction =
   | WorkflowHttpRequestAction
   | WorkflowAiAgentAction
   | WorkflowIteratorAction
-  | WorkflowAiSummaryAction;
+  | WorkflowAiSummaryAction
+  | WorkflowEmptyAction;

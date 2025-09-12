@@ -8,25 +8,22 @@ import { SettingsSkeletonLoader } from '@/settings/components/SettingsSkeletonLo
 import { SettingsDevelopersRoleSelector } from '@/settings/developers/components/SettingsDevelopersRoleSelector';
 import { EXPIRATION_DATES } from '@/settings/developers/constants/ExpirationDates';
 import { apiKeyTokenFamilyState } from '@/settings/developers/states/apiKeyTokenFamilyState';
-import { SettingsPath } from '@/types/SettingsPath';
 import { Select } from '@/ui/input/components/Select';
 import { SettingsTextInput } from '@/ui/input/components/SettingsTextInput';
 import { SubMenuTopBarContainer } from '@/ui/layout/page/components/SubMenuTopBarContainer';
-import { useIsFeatureEnabled } from '@/workspace/hooks/useIsFeatureEnabled';
 import { useLingui } from '@lingui/react/macro';
 import { useRecoilCallback, useRecoilValue } from 'recoil';
 import { Key } from 'ts-key-enum';
-import { isDefined } from 'twenty-shared/utils';
+import { SettingsPath } from 'twenty-shared/types';
+import { getSettingsPath, isDefined } from 'twenty-shared/utils';
 import { H2Title } from 'twenty-ui/display';
 import { Section } from 'twenty-ui/layout';
 import {
-  FeatureFlagKey,
   useCreateApiKeyMutation,
   useGenerateApiKeyTokenMutation,
   useGetRolesQuery,
 } from '~/generated-metadata/graphql';
 import { useNavigateSettings } from '~/hooks/useNavigateSettings';
-import { getSettingsPath } from '~/utils/navigation/getSettingsPath';
 
 export const SettingsDevelopersApiKeysNew = () => {
   const { t } = useLingui();
@@ -35,11 +32,15 @@ export const SettingsDevelopersApiKeysNew = () => {
   const currentWorkspace = useRecoilValue(currentWorkspaceState);
   const { data: rolesData, loading: rolesLoading } = useGetRolesQuery({
     onCompleted: (data) => {
-      if (isApiKeyRolesEnabled && isDefined(data?.getRoles)) {
+      if (isDefined(data?.getRoles)) {
         const defaultRole = data.getRoles.find(
           (role) => role.id === currentWorkspace?.defaultRole?.id,
         );
-        if (isDefined(defaultRole) && !formValues.roleId) {
+        if (
+          isDefined(defaultRole) &&
+          defaultRole.canBeAssignedToApiKeys &&
+          !formValues.roleId
+        ) {
           setFormValues((prev) => ({
             ...prev,
             roleId: defaultRole.id,
@@ -49,11 +50,6 @@ export const SettingsDevelopersApiKeysNew = () => {
     },
   });
   const roles = rolesData?.getRoles ?? [];
-  const isApiKeyRolesEnabled = useIsFeatureEnabled(
-    FeatureFlagKey.IS_API_KEY_ROLES_ENABLED,
-  );
-
-  const adminRole = roles.find((role) => role.label === 'Admin');
 
   const [formValues, setFormValues] = useState<{
     name: string;
@@ -80,9 +76,7 @@ export const SettingsDevelopersApiKeysNew = () => {
       .plus({ days: formValues.expirationDate ?? 30 })
       .toString();
 
-    const roleIdToUse = isApiKeyRolesEnabled
-      ? formValues.roleId
-      : adminRole?.id;
+    const roleIdToUse = formValues.roleId;
 
     if (!roleIdToUse) {
       return;
@@ -122,9 +116,7 @@ export const SettingsDevelopersApiKeysNew = () => {
     }
   };
 
-  const canSave = isApiKeyRolesEnabled
-    ? !!formValues.name && !!formValues.roleId && createApiKey
-    : !!formValues.name && !!adminRole?.id && createApiKey;
+  const canSave = !!formValues.name && !!formValues.roleId && createApiKey;
 
   if (rolesLoading) {
     return <SettingsSkeletonLoader />;
@@ -175,24 +167,22 @@ export const SettingsDevelopersApiKeysNew = () => {
             fullWidth
           />
         </Section>
-        {isApiKeyRolesEnabled && (
-          <Section>
-            <H2Title
-              title={t`Role`}
-              description={t`What this API can do: Select a user role to define its permissions.`}
-            />
-            <SettingsDevelopersRoleSelector
-              value={formValues.roleId}
-              onChange={(roleId) => {
-                setFormValues((prevState) => ({
-                  ...prevState,
-                  roleId,
-                }));
-              }}
-              roles={roles}
-            />
-          </Section>
-        )}
+        <Section>
+          <H2Title
+            title={t`Role`}
+            description={t`What this API can do: Select a user role to define its permissions.`}
+          />
+          <SettingsDevelopersRoleSelector
+            value={formValues.roleId}
+            onChange={(roleId) => {
+              setFormValues((prevState) => ({
+                ...prevState,
+                roleId,
+              }));
+            }}
+            roles={roles}
+          />
+        </Section>
         <Section>
           <H2Title
             title={t`Expiration Date`}

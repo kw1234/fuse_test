@@ -9,6 +9,7 @@ import {
 import { AiAgentWorkflowAction } from 'src/modules/workflow/workflow-executor/workflow-actions/ai-agent/ai-agent.workflow-action';
 import { AiSummaryWorkflowAction } from 'src/modules/workflow/workflow-executor/workflow-actions/ai-summary/ai-summary.workflow-action';
 import { CodeWorkflowAction } from 'src/modules/workflow/workflow-executor/workflow-actions/code/code.workflow-action';
+import { EmptyWorkflowAction } from 'src/modules/workflow/workflow-executor/workflow-actions/empty/empty.workflow-action';
 import { FilterWorkflowAction } from 'src/modules/workflow/workflow-executor/workflow-actions/filter/filter.workflow-action';
 import { FormWorkflowAction } from 'src/modules/workflow/workflow-executor/workflow-actions/form/form.workflow-action';
 import { IteratorWorkflowAction } from 'src/modules/workflow/workflow-executor/workflow-actions/iterator/iterator.workflow-action';
@@ -33,6 +34,7 @@ export class WorkflowActionFactory {
     private readonly toolExecutorWorkflowAction: ToolExecutorWorkflowAction,
     private readonly aiAgentWorkflowAction: AiAgentWorkflowAction,
     private readonly aiSummaryWorkflowAction: AiSummaryWorkflowAction,
+    private readonly emptyWorkflowAction: EmptyWorkflowAction,
   ) {}
 
   get(stepType: WorkflowActionType): WorkflowAction {
@@ -61,6 +63,8 @@ export class WorkflowActionFactory {
         return this.aiAgentWorkflowAction;
       case WorkflowActionType.AI_SUMMARY:
         return this.aiSummaryWorkflowAction;
+      case WorkflowActionType.EMPTY:
+        return this.emptyWorkflowAction;
       default:
         throw new WorkflowStepExecutorException(
           `Workflow step executor not found for step type '${stepType}'`,
