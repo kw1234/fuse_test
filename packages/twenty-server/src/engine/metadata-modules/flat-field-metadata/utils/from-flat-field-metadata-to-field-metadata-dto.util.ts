@@ -5,6 +5,10 @@ import { type FlatRelationTargetFieldMetadata } from 'src/engine/metadata-module
 export const fromFlatFieldMetadataToFieldMetadataDto = (
   flatFieldMetadata: FlatFieldMetadata | FlatRelationTargetFieldMetadata,
 ): FieldMetadataDTO => {
+  if (!flatFieldMetadata) {
+    throw new Error('flatFieldMetadata is undefined');
+  }
+
   const {
     createdAt,
     updatedAt,

@@ -12,6 +12,10 @@ export class AddMorphIdToFieldMetadata1756910835948
     await queryRunner.query(
       `ALTER TABLE "core"."fieldMetadata" ADD "morphId" uuid`,
     );
+    // Update existing MORPH_RELATION fields to have a morphId before adding constraint
+    await queryRunner.query(
+      `UPDATE "core"."fieldMetadata" SET "morphId" = gen_random_uuid() WHERE "type" = 'MORPH_RELATION' AND "morphId" IS NULL`,
+    );
     await queryRunner.query(
       `ALTER TABLE "core"."fieldMetadata" ADD CONSTRAINT "CHK_FIELD_METADATA_MORPH_RELATION_REQUIRES_MORPH_ID" CHECK (("type" != 'MORPH_RELATION') OR ("type" = 'MORPH_RELATION' AND "morphId" IS NOT NULL))`,
     );

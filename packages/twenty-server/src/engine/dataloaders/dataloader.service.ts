@@ -140,6 +140,10 @@ export class DataloaderService {
                 flatObjectMetadataMaps: existingFlatObjectMetadataMaps,
               }).sort((a, b) => (a.id > b.id ? 1 : -1));
 
+            if (allMorphFlatFieldMetadatas.length === 0) {
+              continue;
+            }
+
             relationDtos.push(
               fromMorphOrRelationFlatFieldMetadataToRelationDto({
                 flatFieldMetadata: {
