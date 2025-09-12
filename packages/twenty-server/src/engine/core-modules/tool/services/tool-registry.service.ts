@@ -4,6 +4,7 @@ import { ToolType } from 'src/engine/core-modules/tool/enums/tool-type.enum';
 import { HttpTool } from 'src/engine/core-modules/tool/tools/http-tool/http-tool';
 import { SendEmailTool } from 'src/engine/core-modules/tool/tools/send-email-tool/send-email-tool';
 import { type SendEmailInput } from 'src/engine/core-modules/tool/tools/send-email-tool/types/send-email-input.type';
+import { WebSearchTool } from 'src/engine/core-modules/tool/tools/web-search-tool/web-search-tool';
 import { type Tool } from 'src/engine/core-modules/tool/types/tool.type';
 import { PermissionFlagType } from 'src/engine/metadata-modules/permissions/constants/permission-flag-type.constants';
 
@@ -24,6 +25,29 @@ export class ToolRegistryService {
           flag: PermissionFlagType.SEND_EMAIL_TOOL,
         }),
       ],
+      [ToolType.WEB_SEARCH, () => new WebSearchTool()],
+      //TODO: Implement this
+      // [
+      //   ToolType.CONTEXT_RETRIEVAL,
+      //   () => ({
+      //     // Register new tool
+      //     description: this.contextRetrievalTool.description,
+      //     parameters: this.contextRetrievalTool.parameters,
+      //     execute: (params) => this.contextRetrievalTool.execute(params),
+      //     flag: PermissionFlagType.DATA_ACCESS,
+      //   }),
+      // ],
+      // [
+      //   ToolType.INTERNAL_API,
+      //   () => ({
+      //     // Register new tool
+      //     description: this.internalApiTool.description,
+      //     parameters: this.internalApiTool.parameters,
+      //     execute: (params) => this.internalApiTool.execute(params),
+      //     flag: PermissionFlagType.INTERNAL_API_ACCESS,
+      //   }),
+      // ],
+
     ]);
   }
 
