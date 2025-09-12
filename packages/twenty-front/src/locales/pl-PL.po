@@ -625,6 +625,11 @@ msgstr "Model AI"
 msgid "AI Response Schema"
 msgstr "Schemat odpowiedzi AI"
 
+#. js-lingui-id: j8R4aJ
+#: src/modules/workflow/workflow-steps/workflow-actions/utils/getActionHeaderTypeOrThrow.ts
+msgid "AI Summary"
+msgstr ""
+
 #. js-lingui-id: N40H+G
 #: src/modules/settings/roles/role-permissions/object-level-permissions/field-permissions/components/SettingsRolePermissionsObjectLevelObjectFieldPermissionTableAllHeaderRow.tsx
 #: src/modules/settings/roles/role-permissions/object-level-permissions/components/SettingsRolePermissionsObjectLevelUpdateFieldsValueForObject.tsx
@@ -1084,10 +1089,10 @@ msgstr "Boolean"
 msgid "Brief explanation of this output field"
 msgstr "Krótki opis tego pola wyjściowego"
 
-#. js-lingui-id: 8Pfllj
+#. js-lingui-id: lBCpcl
 #: src/modules/auth/sign-in-up/components/FooterNote.tsx
-msgid "By using Twenty, you agree to the"
-msgstr "Używając Twenty, zgadzasz się na"
+msgid "By using Fuse, you agree to the"
+msgstr ""
 
 #. js-lingui-id: PmmvzS
 #: src/modules/object-record/record-table/record-table-footer/components/RecordTableColumnAggregateFooterValue.tsx
