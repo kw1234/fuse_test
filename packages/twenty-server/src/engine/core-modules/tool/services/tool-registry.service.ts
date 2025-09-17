@@ -5,6 +5,7 @@ import { HttpTool } from 'src/engine/core-modules/tool/tools/http-tool/http-tool
 import { SendEmailTool } from 'src/engine/core-modules/tool/tools/send-email-tool/send-email-tool';
 import { type SendEmailInput } from 'src/engine/core-modules/tool/tools/send-email-tool/types/send-email-input.type';
 import { WebSearchTool } from 'src/engine/core-modules/tool/tools/web-search-tool/web-search-tool';
+import { type WebSearchInput } from 'src/engine/core-modules/tool/tools/web-search-tool/types/web-search-input.type';
 import { type Tool } from 'src/engine/core-modules/tool/types/tool.type';
 import { PermissionFlagType } from 'src/engine/metadata-modules/permissions/constants/permission-flag-type.constants';
 
@@ -12,7 +13,10 @@ import { PermissionFlagType } from 'src/engine/metadata-modules/permissions/cons
 export class ToolRegistryService {
   private readonly toolFactories: Map<ToolType, () => Tool>;
 
-  constructor(private readonly sendEmailTool: SendEmailTool) {
+  constructor(
+    private readonly sendEmailTool: SendEmailTool,
+    private readonly webSearchTool: WebSearchTool,
+  ) {
     this.toolFactories = new Map<ToolType, () => Tool>([
       [ToolType.HTTP_REQUEST, () => new HttpTool()],
       [
@@ -25,7 +29,15 @@ export class ToolRegistryService {
           flag: PermissionFlagType.SEND_EMAIL_TOOL,
         }),
       ],
-      [ToolType.WEB_SEARCH, () => new WebSearchTool()],
+      [
+        ToolType.WEB_SEARCH,
+        () => ({
+          description: this.webSearchTool.description,
+          parameters: this.webSearchTool.parameters,
+          execute: (params) =>
+            this.webSearchTool.execute(params as WebSearchInput),
+        }),
+      ],
       //TODO: Implement this
       // [
       //   ToolType.CONTEXT_RETRIEVAL,
@@ -47,7 +59,6 @@ export class ToolRegistryService {
       //     flag: PermissionFlagType.INTERNAL_API_ACCESS,
       //   }),
       // ],
-
     ]);
   }
 

@@ -1,4 +1,5 @@
 import { Global, Module } from '@nestjs/common';
+import { HttpModule } from '@nestjs/axios';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AiController } from 'src/engine/core-modules/ai/controllers/ai.controller';
@@ -14,6 +15,8 @@ import { FeatureFlagModule } from 'src/engine/core-modules/feature-flag/feature-
 import { RecordTransformerModule } from 'src/engine/core-modules/record-transformer/record-transformer.module';
 import { ToolRegistryService } from 'src/engine/core-modules/tool/services/tool-registry.service';
 import { SendEmailTool } from 'src/engine/core-modules/tool/tools/send-email-tool/send-email-tool';
+import { WebSearchTool } from 'src/engine/core-modules/tool/tools/web-search-tool/web-search-tool';
+import { WebSearchService } from 'src/engine/core-modules/tool/tools/web-search-tool/web-search.service';
 import { ObjectMetadataModule } from 'src/engine/metadata-modules/object-metadata/object-metadata.module';
 import { PermissionsModule } from 'src/engine/metadata-modules/permissions/permissions.module';
 import { RoleEntity } from 'src/engine/metadata-modules/role/role.entity';
@@ -26,6 +29,7 @@ import { MessagingModule } from 'src/modules/messaging/messaging.module';
 @Global()
 @Module({
   imports: [
+    HttpModule,
     TypeOrmModule.forFeature([RoleEntity]),
     TokenModule,
     FeatureFlagModule,
@@ -48,6 +52,8 @@ import { MessagingModule } from 'src/modules/messaging/messaging.module';
     AIBillingService,
     McpService,
     SendEmailTool,
+    WebSearchTool,
+    WebSearchService,
   ],
   exports: [
     AiService,
@@ -58,6 +64,8 @@ import { MessagingModule } from 'src/modules/messaging/messaging.module';
     ToolRegistryService,
     McpService,
     SendEmailTool,
+    WebSearchTool,
+    WebSearchService,
   ],
 })
 export class AiModule {}

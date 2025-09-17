@@ -2,11 +2,11 @@ import { z } from 'zod';
 
 export const WebSearchInputZodSchema = z.object({
   query: z.string().describe('The search query to execute'),
-    maxResults: z
-      .number()
-      .default(10)
-      .describe('Maximum number of search results to return (1-20, default: 10)')
-      .optional(),
+  maxResults: z
+    .number()
+    .default(10)
+    .describe('Maximum number of search results to return (1-20, default: 10)')
+    .optional(),
 });
 
 export const WebSearchParametersZodSchema = z.object({
